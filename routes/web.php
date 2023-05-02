@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ObjetoController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('api/objetos/list', [ObjetoController::class, 'mostrarObjetos']);
+Route::get('api/objetos/list/{id_objeto}', [ObjetoController::class, 'mostrarObjetoPorId']);
+Route::post('api/objetos/save', [ObjetoController::class, 'guardarObjeto']);
+Route::post('api/objetos/update/{id_obj}', [ObjetoController::class, 'editarObjeto']);
+Route::delete('api/objetos/delete/{id_obj}', [ObjetoController::class, 'eliminarObjeto']);
