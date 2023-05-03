@@ -14,8 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/objetos', function () {
+    return view('objetos.index');
 });
 Route::get('api/objetos/list', [ObjetoController::class, 'mostrarObjetos']);
 Route::get('api/objetos/list/{id_objeto}', [ObjetoController::class, 'mostrarObjetoPorId']);

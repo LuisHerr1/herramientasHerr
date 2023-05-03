@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\Http;
 use App\Models\Objeto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -11,13 +12,9 @@ class ObjetoController extends Controller
     public function mostrarObjetos(){
         $objetos = Objeto::all();
         if (count($objetos) == 0) {
-            return response()->json(
-                ['mensaje' => 'no hay objetos en la base datos']
-            );
+            return Http::respuesta(http::retNotFound, "no se encontro el id");
         }
-        return response()->json(
-            $objetos
-        );
+        return http::respuesta(http::retOK, $objetos);
     }
 
     public function mostrarObjetoPorId(Request $request){
