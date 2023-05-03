@@ -40,7 +40,12 @@
                 editarObjeto(id_obj){  //deberia estar este metodo fuera del metodo obtenerObjetos??
 
                     //validar si el id_existe, es decir si el id ingresado es el mismo que esta en la tabla de la base de datos
-
+                    if(id_obj){
+                        const forma = this.forma;
+                        const material = this.material;
+                        const typo = this.typo;
+                    }
+                    return 
                     //si existe entonces editar o modificar los campos requeridos
                 },
 
