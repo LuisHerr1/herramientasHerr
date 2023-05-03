@@ -22,3 +22,17 @@ Route::get('api/objetos/list/{id_objeto}', [ObjetoController::class, 'mostrarObj
 Route::post('api/objetos/save', [ObjetoController::class, 'guardarObjeto']);
 Route::post('api/objetos/update/{id_obj}', [ObjetoController::class, 'editarObjeto']);
 Route::delete('api/objetos/delete/{id_obj}', [ObjetoController::class, 'eliminarObjeto']);
+
+
+//en el bloque siguiente se colocan las rutas para todas las acciones sobre la tabla detalles
+
+Route::get('/detalles', function () {
+    return view('objetos.detallesindex');
+});
+
+Route::get('api/detalles/list', [ObjetoController::class, 'mostrarObjetos']);
+Route::get('api/detalles/list/{id_objeto}', [ObjetoController::class, 'mostrarObjetoPorId']);
+Route::post('api/detalles/save', [ObjetoController::class, 'guardarObjeto']);
+Route::post('api/detalles/update/{id_obj}', [ObjetoController::class, 'editarObjeto']);
+Route::delete('api/detalles/delete/{id_obj}', [ObjetoController::class, 'eliminarObjeto']);
+

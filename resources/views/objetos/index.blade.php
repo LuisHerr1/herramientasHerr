@@ -37,11 +37,14 @@
                         return response.data;
                     }).catch(error => console.log(error));
                 },
-                editarProducto(id_producto){
-                    //llenar para editar
+                editarObjeto(id_obj){  //deberia estar este metodo fuera del metodo obtenerObjetos??
+
+                    //validar si el id_existe, es decir si el id ingresado es el mismo que esta en la tabla de la base de datos
+
+                    //si existe entonces editar o modificar los campos requeridos
                 },
 
-                eliminarProducto(id_productos){
+                eliminarObjeto(id_obj){ //deberia estar este metodo fuera del metodo obtenerObjetos??
 
                 },
             }
@@ -60,7 +63,9 @@
     }
     </script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.0/dist/cdn.min.js"></script>
-    <title>Productos</title>
+
+    <title>@yield('title')</title>
+
 </head>
 <body>
     <div class="container-fluid">
