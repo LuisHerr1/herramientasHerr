@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\DBAL\TimestampType;
 
-class Detalles extends Model
+class Categorias extends Model
 {
     //use HasFactory;
-    protected $tabla = "detalles";
-    protected $primaryKey = "id_det";
+    protected $tabla =  "categorias";
+    protected $primaryKey = "id";
     public $timestamps = false;
 }

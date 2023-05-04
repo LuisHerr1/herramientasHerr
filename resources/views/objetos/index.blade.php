@@ -8,48 +8,70 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script defer>
         //guardar producto
-        function guardarObjetos() {
-            const forma = this.forma;
-            const material = this.material;
-            const typo = this.typo;
+        function guardarProducto() {
+            const num_serie = this.num_serie;
+            const nombre = this.nombre;
+            const imagen = this.imagen;
+            const cantidad = this.cantidad;
+            const precio_compra = this.precio_compra;
+            const precio_venta = this.precio_venta;
+            const fecha_vencimiento = this.fecha_vencimiento;
+            const id_categorias = this.id_categorias;
+            const id_marcas = this.id_marcas;
+            const id_proveedores = this.id_proveedores;
 
-            axios.post('http://127.0.0.1:8000/api/objetos/save', {
-                forma,
-                material,
-                typo
+            axios.post('http://127.0.0.1:8000/api/productos/save', {
+                num_serie,
+                nombre,
+                imagen,
+                cantidad,
+                precio_compra,
+                precio_venta,
+                fecha_vencimiento,
+                id_categorias,
+                id_marcas,
+                id_proveedores
             })
             .then(response => {
                 console.log(response.data);
-                obtenerObjetos();
+                obtenerProducto();
             })
             .catch(error => {
                 console.log(error.response.data);
             });
         }
 
-        function obtenerObjetos() {
+        function obtenerProducto() {
             return {
-                objetos: [],
+                productos: [],
                 init: async function(){
-                    this.objetos = await axios.get('http://127.0.0.1:8000/api/objetos/list')
+                    this.productos = await axios.get('http://127.0.0.1:8000/api/productos/list')
                     .then(response => {
                         console.log(response.data);
                         return response.data;
                     }).catch(error => console.log(error));
                 },
-                editarObjeto(id_obj){  //deberia estar este metodo fuera del metodo obtenerObjetos??
-
-                    //validar si el id_existe, es decir si el id ingresado es el mismo que esta en la tabla de la base de datos
-                    if(id_obj){
-                        const forma = this.forma;
-                        const material = this.material;
-                        const typo = this.typo;
-                    }
-                    return 
-                    //si existe entonces editar o modificar los campos requeridos
+                editarProducto(id_obj){
+                    axios.post("http://127.0.0.1:8000/api/productos/update/"+id)
+                    .then(response => {
+                        num_serie,
+                        nombre,
+                        imagen,
+                        cantidad,
+                        precio_compra,
+                        precio_venta,
+                        fecha_vencimiento,
+                        id_categorias,
+                        id_marcas,
+                        id_proveedores
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.log(error.response.data);
+                });
                 },
 
-                eliminarObjeto(id_obj){ //deberia estar este metodo fuera del metodo obtenerObjetos??
+                eliminarProducto(id){ //deberia estar este metodo fuera del metodo obtenerproductos??
 
                 },
             }
@@ -77,7 +99,7 @@
         <div class="row mt-3">
             <div class="col-md-4 offset-md-4">
                 <div class="d-grid mx-auto">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalObjetos">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalProductos">
                         Nuevo
                     </button>
                 </div>
@@ -90,22 +112,36 @@
                         <thead>
                             <tr>
                                 <th class="text-center">ID</th>
-                                <th class="text-center">Forma</th>
-                                <th class="text-center">Material</th>
-                                <th class="text-center">Typo</th>
-                                <th class="text-center">ACCIONES</th>
+                                <th class="text-center">Numero Serie</th>
+                                <th class="text-center">Nombre</th>
+                                <th class="text-center">imagen</th>
+                                <th class="text-center">Cantidad</th>
+                                <th class="text-center">Precio Compra</th>
+                                <th class="text-center">Precio venta</th>
+                                <th class="text-center">Fecha de Vencimiento</th>
+                                <th class="text-center">ID categorias</th>
+                                <th class="text-center">ID Marcas</th>
+                                <th class="text-center">ID proveedores</th>
+                                <th class="text-center">acciones</th>
                             </tr>
                         </thead>
-                        <tbody x-data='obtenerObjetos()'>
-                            <template x-for='(objeto,index) in objetos.datos' :key='index'>
+                        <tbody x-data='obtenerProducto()'>
+                            <template x-for='(producto,index) in productos.datos' :key='index'>
                                 <tr>
-                                    <td class="text-center" x-text="objeto.id_obj"></td>
-                                    <td class="text-center" x-text="objeto.forma"></td>
-                                    <td class="text-center" x-text="objeto.material"></td>
-                                    <td class="text-center" x-text="objeto.typo"></td>
-                                    <td class="text-center">
-                                        <button class="btn btn-info" @click="editarProducto(producto.id_productos)">Editar</button>
-                                        <button class="btn btn-danger" @click="eliminarProducto(producto.id_productos)">Eliminar</button>
+                                    <td class="text-center" x-text="producto.id"></td>
+                                    <td class="text-center" x-text="producto.num_serie"></td>
+                                    <td class="text-center" x-text="producto.nombre"></td>
+                                    <td class="text-center" x-text="producto.imagen"></td>
+                                    <td class="text-center" x-text="producto.cantidad"></td>
+                                    <td class="text-center" x-text="producto.precio_compra"></td>
+                                    <td class="text-center" x-text="producto.precio_venta"></td>
+                                    <td class="text-center" x-text="producto.fecha_vencimiento"></td>
+                                    <td class="text-center" x-text="producto.id_categorias"></td>
+                                    <td class="text-center" x-text="producto.id_marcas"></td>
+                                    <td class="text-center" x-text="producto.id_proveedores"></td>
+                                    <td class="text-center" >
+                                        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalProductos" @click="editarProducto(producto.id)">Editar</button>
+                                        <button class="btn btn-danger" @click="eliminarProducto(producto.id)">Eliminar</button>
                                     </td>
                                 </tr>
                             </template>
@@ -116,7 +152,7 @@
         </div>
     </div>
     <!-- INICIO DEL MODAL PRODUCTOS-->
-    <div class="modal fade" id="modalObjetos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modalProductos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -124,20 +160,51 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div x-data="{ forma: '', material: '', typo: '' }">
-                    <form @submit.prevent="guardarObjetos">
+                <div x-data="{ num_serie: '', nombre: '', imagen: '', cantidad:'',precio_compra:'', precio_venta:'',fecha_vencimiento:'', id_categorias:'', id_marcas: '', id_proveedores:'' }">
+                    <form @submit.prevent="guardarProducto">
                         <div class="form-group mt-2">
-                            <label for="nombre_pro">Forma:</label>
-                            <input type="text" class="form-control" id="forma" x-model="forma">
+                            <label for="num_serie">Numero Serie:</label>
+                            <input type="text" class="form-control" id="num_serie" x-model="num_serie">
                         </div>
                         <div class="form-group mt-2">
-                            <label for="cantidad">Material:</label>
-                            <input class="form-control" type="text" id="material" x-model="material">
+                            <label for="nombre">nombre:</label>
+                            <input class="form-control" type="text" id="nombre" x-model="nombre">
                         </div>
                         <div class="form-group mt-2">
-                            <label for="precio">Typo:</label>
-                            <input class="form-control" type="text" id="typo" x-model="typo">
+                            <label for="imagen">imagen:</label>
+                            <input class="form-control" type="text" id="imagen" x-model="imagen">
                         </div>
+                        <div class="form-group mt-2">
+                            <label for="cantidad">Cantidad:</label>
+                            <input class="form-control" type="number" id="cantidad" x-model="cantidad">
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="precio_compra">compra:</label>
+                            <input class="form-control" type="number" id="precio_compra" x-model="precio_compra" step=".01">
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="precio_venta">venta:</label>
+                            <input class="form-control" type="number" id="precio_venta" x-model="precio_venta" step=".01">
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="fecha_vencimiento">vence:</label>
+                            <input class="form-control" type="date" id="fecha_vencimiento" x-model="fecha_vencimiento" >
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="id_categorias">categoria:</label>
+                            <input class="form-control" type="integer" id="id_categorias" x-model="id_categorias" >
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="id_marcas">Marcas:</label>
+                            <input class="form-control" type="integer" id="id_marcas" x-model="id_marcas" >
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="id_proveedores">Proveedores:</label>
+                            <input class="form-control" type="integer" id="id_proveedores" x-model="id_proveedores" >
+                        </div>
+
+
+
                         <div class="form-group mt-2">
                             <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Registrar</button>
                         </div>
