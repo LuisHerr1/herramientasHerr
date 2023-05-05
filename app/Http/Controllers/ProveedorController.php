@@ -38,20 +38,23 @@ class ProveedorController extends Controller
         $validador = Validator::make($request->all(),[
             'codigo'=>'required|string|unique:proveedores,codigo',//aca para declarar un campo como unico se debe colocar primero la tabla de donde procede el campo que sera unico
             'nombre'=>'required|string',
-            'telefono'=>'required|string',
+            'telefono'=>'required|string|unique:proveedores,telefono',
             'correo'=>'required|email',
             'direccion'=>'required|string'
         ]);
         if($validador->fails()){
-            return Http::respuesta(http::retError,'hubo un error al ingrasar los datos');
+            return response()->json(
+                ['mensaje' => $validador->errors()]);
+           /*  Http::respuesta(http::retError,'hubo un error al ingrasar los datos'); */
         }
         $proveedor = new Proveedores();
         $proveedor->codigo = $request->codigo;
         $proveedor->nombre = $request->nombre;
         $proveedor->telefono = $request->telefono;
         $proveedor->correo = $request->correo;
-        $proveedor->correo = $request->direccion;
+        $proveedor->direccion = $request->direccion;
         $proveedor->save();
+        return Http::respuesta(http::retOK,'dartos guardados con exito');
 
 
 
