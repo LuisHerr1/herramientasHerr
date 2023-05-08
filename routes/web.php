@@ -23,7 +23,7 @@ Route::get('/Productos', function () {
 Route::get('api/productos/list', [ProductosController::class, 'mostrarProducto']);
 Route::get('api/productos/list/{id}', [ProductosController::class, 'mostrarProductoPorId']);
 Route::post('api/productos/save', [ProductosController::class, 'guardarProducto']);
-Route::post('api/productos/update/{id}', [ProductosController::class, 'editarProducto']);
+Route::put('api/productos/update/{id}', [ProductosController::class, 'editarProducto']);
 Route::delete('api/productos/delete/{id}', [ProductosController::class, 'eliminarProducto']);
 
 

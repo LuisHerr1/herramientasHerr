@@ -52,8 +52,18 @@
                     }).catch(error => console.log(error));
                 },
                 editarProducto(id){
-                    axios.post("http://127.0.0.1:8000/api/productos/update/"+id)
-                    .then(response => {
+                    const num_serie = this.num_serie;
+                    const nombre = this.nombre;
+                    const imagen = this.imagen;
+                    const cantidad = this.cantidad;
+                    const precio_compra = this.precio_compra;
+                    const precio_venta = this.precio_venta;
+                    const fecha_vencimiento = this.fecha_vencimiento;
+                    const id_categorias = this.id_categorias;
+                    const id_marcas = this.id_marcas;
+                    const id_proveedores = this.id_proveedores;
+
+                    axios.put('http://127.0.0.1:8000/api/productos/update/'+id, {
                         num_serie,
                         nombre,
                         imagen,
@@ -64,12 +74,15 @@
                         id_categorias,
                         id_marcas,
                         id_proveedores
-                    console.log(response.data);
-                })
-                .catch(error => {
-                    console.log(error.response.data);
-                });
-                },
+                    })
+                    .then(response => {
+                        console.log(response.data);
+                        obtenerProducto();
+                    })
+                    .catch(error => {
+                        console.log(error.response.data);
+                    });
+                        },
 
                 eliminarProducto(id){ //deberia estar este metodo fuera del metodo obtenerproductos??
                     axios.delete("http://127.0.0.1:8000/api/productos/delete/"+id)

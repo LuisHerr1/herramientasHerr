@@ -69,10 +69,10 @@ class productosController extends Controller
     }
 
     public function editarProducto(Request $request){
-        $idProducto = productos::find($request->id_det);
+        $idProducto = productos::find($request->id);
         if (!$idProducto) {
             return response()->json(
-                ['mensaje' => 'no existe ess productos']
+                ['mensaje' => 'no existe ese productos']
             );
         }
 
