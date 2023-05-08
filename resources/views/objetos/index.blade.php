@@ -161,7 +161,7 @@
             </div>
             <div class="modal-body">
                 <div x-data="{ num_serie: '', nombre: '', imagen: '', cantidad:'',precio_compra:'', precio_venta:'',fecha_vencimiento:'', id_categorias:'', id_marcas: '', id_proveedores:'' }">
-                    <form @submit.prevent="guardarProducto">
+                    <form @submit.prevent="guardarProducto"> <!--los nombres deben ir tal como en los campos de la tabla-->
                         <div class="form-group mt-2">
                             <label for="num_serie">Numero Serie:</label>
                             <input type="text" class="form-control" id="num_serie" x-model="num_serie">

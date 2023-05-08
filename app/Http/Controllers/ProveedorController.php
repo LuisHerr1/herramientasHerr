@@ -47,6 +47,7 @@ class ProveedorController extends Controller
                 ['mensaje' => $validador->errors()]);
            /*  Http::respuesta(http::retError,'hubo un error al ingrasar los datos'); */
         }
+        
         $proveedor = new Proveedores();
         $proveedor->codigo = $request->codigo;
         $proveedor->nombre = $request->nombre;
