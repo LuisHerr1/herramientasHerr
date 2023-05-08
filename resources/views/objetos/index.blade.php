@@ -51,7 +51,7 @@
                         return response.data;
                     }).catch(error => console.log(error));
                 },
-                editarProducto(id_obj){
+                editarProducto(id){
                     axios.post("http://127.0.0.1:8000/api/productos/update/"+id)
                     .then(response => {
                         num_serie,
@@ -72,7 +72,11 @@
                 },
 
                 eliminarProducto(id){ //deberia estar este metodo fuera del metodo obtenerproductos??
-
+                    axios.delete("http://127.0.0.1:8000/api/productos/delete/"+id)
+                    .then(res=> {
+                        console.log(res.data);
+                    })
+                    .catch(err => console.log(err));
                 },
             }
         }
