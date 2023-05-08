@@ -52,18 +52,7 @@
                     }).catch(error => console.log(error));
                 },
                 editarProducto(id){
-                    const num_serie = this.num_serie;
-                    const nombre = this.nombre;
-                    const imagen = this.imagen;
-                    const cantidad = this.cantidad;
-                    const precio_compra = this.precio_compra;
-                    const precio_venta = this.precio_venta;
-                    const fecha_vencimiento = this.fecha_vencimiento;
-                    const id_categorias = this.id_categorias;
-                    const id_marcas = this.id_marcas;
-                    const id_proveedores = this.id_proveedores;
-
-                    axios.put('http://127.0.0.1:8000/api/productos/update/'+id, {
+                    axios.put('http://127.0.0.1:8000/api/productos/update/${this.id}', {
                         num_serie,
                         nombre,
                         imagen,
