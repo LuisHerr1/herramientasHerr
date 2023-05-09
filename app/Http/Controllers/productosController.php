@@ -6,6 +6,8 @@ use App\Helpers\Http;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\validator;
 
+
+
 class productosController extends Controller
 {
     public function mostrarProducto(){
@@ -76,6 +78,7 @@ class productosController extends Controller
             );
         }
 
+        $refrescar = productos::findOrFail($request->id);
         $validator = Validator::make($request->all(), [
             'num_serie' =>'required|string',
             'nombre'=>'required|string',

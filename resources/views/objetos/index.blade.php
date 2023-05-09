@@ -52,24 +52,35 @@
                     }).catch(error => console.log(error));
                 },
                 editarProducto(id){
-                    axios.put('http://127.0.0.1:8000/api/productos/update/${this.id}', {
-                        num_serie,
-                        nombre,
-                        imagen,
-                        cantidad,
-                        precio_compra,
-                        precio_venta,
-                        fecha_vencimiento,
-                        id_categorias,
-                        id_marcas,
-                        id_proveedores
+                    const num_serie = document.getElementById('num_serie').value;
+                    const nombre = document.getElementById('nombre').value;
+                    const imagen = document.getElementById('imagen').value;
+                    const cantidad = document.getElementById('cantidad').value;
+                    const precio_compra = document.getElementById('precio_compra').value;
+                    const precio_venta = document.getElementById('precio_venta').value;
+                    const fecha_vencimiento = document.getElementById('fecha_vencimiento').value;
+                    const id_categorias = document.getElementById('id_categorias').value;
+                    const id_marcas = document.getElementById('id_marcas').value;
+                    const id_proveedores = document.getElementById('id_proveedores').value;
+
+                    axios.put('http://127.0.0.1:8000/api/productos/update/'+id, {
+                        num_serie: num_serie,
+                        nombre: nombre,
+                        imagen: imagen,
+                        cantidad: cantidad,
+                        precio_compra: precio_compra,
+                        precio_venta: precio_venta,
+                        fecha_vencimiento: fecha_vencimiento,
+                        id_categorias: id_categorias,
+                        id_marcas: id_marcas,
+                        id_proveedores: id_proveedores
                     })
                     .then(response => {
                         console.log(response.data);
-                        obtenerProducto();
+
                     })
                     .catch(error => {
-                        console.log(error.response.data);
+                        console.log(error.response);
                     });
                         },
 
@@ -170,43 +181,43 @@
                     <form @submit.prevent="guardarProducto"> <!--los nombres deben ir tal como en los campos de la tabla-->
                         <div class="form-group mt-2">
                             <label for="num_serie">Numero Serie:</label>
-                            <input type="text" class="form-control" id="num_serie" x-model="num_serie">
+                            <input type="text" class="form-control" id="num_serie" x-model="num_serie" value="">
                         </div>
                         <div class="form-group mt-2">
                             <label for="nombre">nombre:</label>
-                            <input class="form-control" type="text" id="nombre" x-model="nombre">
+                            <input class="form-control" type="text" id="nombre" x-model="nombre" value="">
                         </div>
                         <div class="form-group mt-2">
                             <label for="imagen">imagen:</label>
-                            <input class="form-control" type="text" id="imagen" x-model="imagen">
+                            <input class="form-control" type="text" id="imagen" x-model="imagen" value="">
                         </div>
                         <div class="form-group mt-2">
                             <label for="cantidad">Cantidad:</label>
-                            <input class="form-control" type="number" id="cantidad" x-model="cantidad">
+                            <input class="form-control" type="number" id="cantidad" x-model="cantidad" value="">
                         </div>
                         <div class="form-group mt-2">
                             <label for="precio_compra">compra:</label>
-                            <input class="form-control" type="number" id="precio_compra" x-model="precio_compra" step=".01">
+                            <input class="form-control" type="number" id="precio_compra" x-model="precio_compra" step=".01" value="">
                         </div>
                         <div class="form-group mt-2">
                             <label for="precio_venta">venta:</label>
-                            <input class="form-control" type="number" id="precio_venta" x-model="precio_venta" step=".01">
+                            <input class="form-control" type="number" id="precio_venta" x-model="precio_venta" step=".01" value="">
                         </div>
                         <div class="form-group mt-2">
                             <label for="fecha_vencimiento">vence:</label>
-                            <input class="form-control" type="date" id="fecha_vencimiento" x-model="fecha_vencimiento" >
+                            <input class="form-control" type="date" id="fecha_vencimiento" x-model="fecha_vencimiento" value="">
                         </div>
                         <div class="form-group mt-2">
                             <label for="id_categorias">categoria:</label>
-                            <input class="form-control" type="integer" id="id_categorias" x-model="id_categorias" >
+                            <input class="form-control" type="integer" id="id_categorias" x-model="id_categorias" value="">
                         </div>
                         <div class="form-group mt-2">
                             <label for="id_marcas">Marcas:</label>
-                            <input class="form-control" type="integer" id="id_marcas" x-model="id_marcas" >
+                            <input class="form-control" type="integer" id="id_marcas" x-model="id_marcas" value="">
                         </div>
                         <div class="form-group mt-2">
                             <label for="id_proveedores">Proveedores:</label>
-                            <input class="form-control" type="integer" id="id_proveedores" x-model="id_proveedores" >
+                            <input class="form-control" type="integer" id="id_proveedores" x-model="id_proveedores" value="">
                         </div>
 
 
