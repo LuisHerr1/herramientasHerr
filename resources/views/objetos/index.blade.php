@@ -20,8 +20,8 @@
             const id_marcas = this.id_marcas;
             const id_proveedores = this.id_proveedores;
 
-            axios.post('http://127.0.0.1:8000/api/productos/save', {
-                num_serie,
+            axios.post('http://127.0.0.1:8000/api/productos/save', {//
+                num_serie,                                          //
                 nombre,
                 imagen,
                 cantidad,
@@ -63,7 +63,7 @@
                     const id_marcas = document.getElementById('id_marcas').value;
                     const id_proveedores = document.getElementById('id_proveedores').value;
  */
-                    /* const table = document.getElementById('productos')
+                   /*  const table = document.getElementById('tabla-productos')
                     const table = document.getElementById('modalProductos')
                     const inputs = document.querrySelectorAll('input')
                     let count = 0;
@@ -86,8 +86,8 @@
                             count+=1
                         }
 
-                    }
- */
+                    } */
+
                     axios.put('http://127.0.0.1:8000/api/productos/update/'+id, {
 
                         num_serie: num_serie,
@@ -142,13 +142,21 @@
         <div class="row mt-3">
             <div class="col-md-4 offset-md-4">
                 <div class="d-grid mx-auto">
+                <!--------------------->
+                <!--RETROALIMENTACION-->
+                <!--------------------->
+                
+                <!--para cambios futuros puede considerase agregar otro modal par la edicion de productos , ya que en el actual tanto como nuevo producto y editar apuntan o usan el mismo modal-->
+                <!-- -->
+
+                    <!--en este boton se sirve para crear una fila en la tabla de datos este hace un llamado hacia un modal que es el mismo llamdo por el boton editar-->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalProductos">
                         Nuevo
                     </button>
                 </div>
             </div>
         </div>
-        <div class="row mt-3" id='productos'>
+        <div class="row mt-3" >
             <div class="col-12 col-lg-8 offset-0 offset-lg-2">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover" id="tabla-productos">
@@ -168,7 +176,7 @@
                                 <th class="text-center">acciones</th>
                             </tr>
                         </thead>
-                        <tbody x-data='obtenerProducto()'>
+                        <tbody x-data='obtenerProducto()'><!--en este -->
                             <template x-for='(producto,index) in productos.datos' :key='index'>
                                 <tr>
                                     <td class="text-center" x-text="producto.id"></td>
@@ -183,6 +191,7 @@
                                     <td class="text-center" x-text="producto.id_marcas"></td>
                                     <td class="text-center" x-text="producto.id_proveedores"></td>
                                     <td class="text-center" >
+                                        <!--el primer siguiente boton es para abrir el modal al dar click sobre el boton se llama a la funcion editarProducto con el parametro"id" de la tabla producto-->
                                         <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalProductos" @click="editarProducto(producto.id)">Editar</button>
                                         <button class="btn btn-danger" @click="eliminarProducto(producto.id)">Eliminar</button>
                                     </td>
@@ -207,7 +216,7 @@
                     <form @submit.prevent="guardarProducto"> <!--los nombres deben ir tal como en los campos de la tabla de la base de datos-->
                         <div class="form-group mt-2">
                             <label for="num_serie">Numero Serie:</label>
-                            <input type="text" class="form-control" id="num_serie" x-model="num_serie" value="">
+                            <input type="text" class="form-control" id="num_serie" x-model="num_serie" value=""><!--es una suposision , form-control sirve como para separar varios opciones-->
                         </div>
                         <div class="form-group mt-2">
                             <label for="nombre">nombre:</label>

@@ -29,4 +29,4 @@ Route::get('/proveedeores',[ProveedorController::class,'mostrarProveedor']);
 Route::get('/proveedeores/{id}',[ProveedorController::class,'mostrarProveedorPorId']);
 Route::delete('/proveedeores/eliminar/{id}',[ProveedorController::class,'eliminarProveedor']);
 Route::post('/proveedeores/save',[ProveedorController::class,'guardarProveedor']);
-//
+

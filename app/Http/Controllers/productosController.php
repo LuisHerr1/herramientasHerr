@@ -39,9 +39,9 @@ class productosController extends Controller
             'precio_compra'=>'required|numeric',
             'precio_venta'=>'required|numeric',
             'fecha_vencimiento'=>'date',
-            'id_categorias'=>'integer',
-            'id_marcas'=>'integer',
-            'id_proveedores'=>'integer'
+            'id_categorias'=>'integer|1-5',//ESTA VALIDACION PUEDE CAMBIAR SEGUN EL NIMERO DE PROVEEDORES AUMENTA
+            'id_marcas'=>'integer|1-5',
+            'id_proveedores'=>'integer|1-5'
 
         ]);
 
@@ -51,7 +51,7 @@ class productosController extends Controller
             );
         }
 
-        $productos = new productos();
+        $productos = new Productos();
         $productos->num_serie = $request->num_serie;
         $productos->nombre = $request->nombre;
         $productos->imagen = $request->imagen;
@@ -62,8 +62,6 @@ class productosController extends Controller
         $productos->id_categorias = $request->id_categorias;
         $productos->id_marcas = $request->id_marcas;
         $productos->id_proveedores = $request->id_proveedores;
-
-
         $productos->save();
         return response()->json(
             ['mensaje' => 'detalles guardados con exito']
@@ -90,7 +88,7 @@ class productosController extends Controller
             'cantidad'=>'required|integer',
             'precio_compra'=>'required|decimal',
             'precio_venta'=>'required|decimal',
-            'fecha_vencimiento'=>'required|string',
+            'fecha_vencimiento'=>'required|string'
             /* 'id_categorias'=>'required|integer',
             'id_marcas'=>'required|integer',
             'id_proveedores'=>'required|integer'
