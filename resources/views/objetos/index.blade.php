@@ -52,7 +52,7 @@
                     }).catch(error => console.log(error));
                 },
                 editarProducto(id){
-                    const num_serie = document.getElementById('num_serie').value;
+                    /* const num_serie = document.getElementById('num_serie').value;
                     const nombre = document.getElementById('nombre').value;
                     const imagen = document.getElementById('imagen').value;
                     const cantidad = document.getElementById('cantidad').value;
@@ -62,8 +62,34 @@
                     const id_categorias = document.getElementById('id_categorias').value;
                     const id_marcas = document.getElementById('id_marcas').value;
                     const id_proveedores = document.getElementById('id_proveedores').value;
+ */
+                    /* const table = document.getElementById('productos')
+                    const table = document.getElementById('modalProductos')
+                    const inputs = document.querrySelectorAll('input')
+                    let count = 0;
 
+                    table.addEventListener('click',(e)=>{
+
+                        if(e.target.matches(".btn-info")){
+                            let data = e.target.patentElement.parentElement.children;
+                            fillData(data)
+                            modal.classList.toggle('translate')
+                        }
+
+
+                    })
+
+                    const fillData = (data)=>{
+                        for(let index  of inputs){
+                            index.value = data[count].textContent
+                            console.log(index)
+                            count+=1
+                        }
+
+                    }
+ */
                     axios.put('http://127.0.0.1:8000/api/productos/update/'+id, {
+
                         num_serie: num_serie,
                         nombre: nombre,
                         imagen: imagen,
@@ -122,7 +148,7 @@
                 </div>
             </div>
         </div>
-        <div class="row mt-3">
+        <div class="row mt-3" id='productos'>
             <div class="col-12 col-lg-8 offset-0 offset-lg-2">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover" id="tabla-productos">
@@ -178,7 +204,7 @@
             </div>
             <div class="modal-body">
                 <div x-data="{ num_serie: '', nombre: '', imagen: '', cantidad:'',precio_compra:'', precio_venta:'',fecha_vencimiento:'', id_categorias:'', id_marcas: '', id_proveedores:'' }">
-                    <form @submit.prevent="guardarProducto"> <!--los nombres deben ir tal como en los campos de la tabla-->
+                    <form @submit.prevent="guardarProducto"> <!--los nombres deben ir tal como en los campos de la tabla de la base de datos-->
                         <div class="form-group mt-2">
                             <label for="num_serie">Numero Serie:</label>
                             <input type="text" class="form-control" id="num_serie" x-model="num_serie" value="">
