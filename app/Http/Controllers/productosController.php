@@ -6,6 +6,8 @@ use App\Helpers\Http;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\validator;
 
+
+
 class productosController extends Controller
 {
     public function mostrarProducto(){
@@ -49,7 +51,7 @@ class productosController extends Controller
             );
         }
 
-        $productos = new productos();
+        $productos = new Productos();
         $productos->num_serie = $request->num_serie;
         $productos->nombre = $request->nombre;
         $productos->imagen = $request->imagen;
@@ -60,8 +62,6 @@ class productosController extends Controller
         $productos->id_categorias = $request->id_categorias;
         $productos->id_marcas = $request->id_marcas;
         $productos->id_proveedores = $request->id_proveedores;
-
-
         $productos->save();
         return response()->json(
             ['mensaje' => 'detalles guardados con exito']
@@ -72,10 +72,15 @@ class productosController extends Controller
         $productos = productos::find($request->id);
         if (!$productos) {
             return response()->json(
-                ['mensaje' => 'no existe ess productos']
-            );
-        }
+                ['mensaje' => 'no existe ese productos']
+            );//al hacer uso de insomnia da como resultado un error 500 en el que ademas se indica que no se puede editar o modificar un row child
+            //una restriccion para una llave foranea falla "SQLSTATE[23000]: Integrity constraint violation: 1452
+            //Cannot add or update a child row: a foreign key constraint fails (`almacen`.`productos`, CONSTRAINT `productos_id_proveedores_foreign`
+            // FOREIGN KEY (`id_proveedores`) REFERENCES `proveedores` (`id`) ON DELETE SET NULL ON UPDATE CASCADE)"
 
+            //una posible solucion es la de ono tratar de moodificar ninguna de las llaves foraneas ya sea en el controlador ni en la vista
+
+        };
         $validator = Validator::make($request->all(), [
             'num_serie' =>'required|string',
             'nombre'=>'required|string',

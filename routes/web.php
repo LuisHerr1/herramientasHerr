@@ -21,10 +21,10 @@ Route::get('/Productos', function () {
 
 //grupo productos-----------------------------------------------
 Route::get('api/productos/list', [ProductosController::class, 'mostrarProducto']);
-Route::get('api/productos/list/{id_objeto}', [ProductosController::class, 'mostrarProductoPorId']);
+Route::get('api/productos/list/{id}', [ProductosController::class, 'mostrarProductoPorId']);
 Route::post('api/productos/save', [ProductosController::class, 'guardarProducto']);
-Route::post('api/productos/update/{id_obj}', [ProductosController::class, 'editarProducto']);
-Route::delete('api/productos/delete/{id_obj}', [ProductosController::class, 'eliminarProducto']);
+Route::put('api/productos/update/{id}', [ProductosController::class, 'editarProducto']);
+Route::delete('api/productos/delete/{id}', [ProductosController::class, 'eliminarProducto']);
 
 
 

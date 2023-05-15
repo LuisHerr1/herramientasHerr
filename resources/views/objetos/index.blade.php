@@ -20,8 +20,8 @@
             const id_marcas = this.id_marcas;
             const id_proveedores = this.id_proveedores;
 
-            axios.post('http://127.0.0.1:8000/api/productos/save', {
-                num_serie,
+            axios.post('http://127.0.0.1:8000/api/productos/save', {//
+                num_serie,                                          //
                 nombre,
                 imagen,
                 cantidad,
@@ -71,7 +71,11 @@
                     console.log(error.response.data);
                     });
                 eliminarProducto(id){ //deberia estar este metodo fuera del metodo obtenerproductos??
-
+                    axios.delete("http://127.0.0.1:8000/api/productos/delete/"+id)
+                    .then(res=> {
+                        console.log(res.data);
+                    })
+                    .catch(err => console.log(err));
                 },
             }
         }
@@ -98,13 +102,21 @@
         <div class="row mt-3">
             <div class="col-md-4 offset-md-4">
                 <div class="d-grid mx-auto">
+                <!--------------------->
+                <!--RETROALIMENTACION-->
+                <!--------------------->
+                
+                <!--para cambios futuros puede considerase agregar otro modal par la edicion de productos , ya que en el actual tanto como nuevo producto y editar apuntan o usan el mismo modal-->
+                <!-- -->
+
+                    <!--en este boton se sirve para crear una fila en la tabla de datos este hace un llamado hacia un modal que es el mismo llamdo por el boton editar-->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalProductos">
                         Nuevo
                     </button>
                 </div>
             </div>
         </div>
-        <div class="row mt-3">
+        <div class="row mt-3" >
             <div class="col-12 col-lg-8 offset-0 offset-lg-2">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover" id="tabla-productos">
@@ -124,7 +136,7 @@
                                 <th class="text-center">acciones</th>
                             </tr>
                         </thead>
-                        <tbody x-data='obtenerProducto()'>
+                        <tbody x-data='obtenerProducto()'><!--en este -->
                             <template x-for='(producto,index) in productos.datos' :key='index'>
                                 <tr>
                                     <td class="text-center" x-text="producto.id"></td>
@@ -139,6 +151,7 @@
                                     <td class="text-center" x-text="producto.id_marcas"></td>
                                     <td class="text-center" x-text="producto.id_proveedores"></td>
                                     <td class="text-center" >
+                                        <!--el primer siguiente boton es para abrir el modal al dar click sobre el boton se llama a la funcion editarProducto con el parametro"id" de la tabla producto-->
                                         <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalProductos" @click="editarProducto(producto.id)">Editar</button>
                                         <button class="btn btn-danger" @click="eliminarProducto(producto.id)">Eliminar</button>
                                     </td>
@@ -160,46 +173,46 @@
             </div>
             <div class="modal-body">
                 <div x-data="{ num_serie: '', nombre: '', imagen: '', cantidad:'',precio_compra:'', precio_venta:'',fecha_vencimiento:'', id_categorias:'', id_marcas: '', id_proveedores:'' }">
-                    <form @submit.prevent="guardarProducto">
+                    <form @submit.prevent="guardarProducto"> <!--los nombres deben ir tal como en los campos de la tabla de la base de datos-->
                         <div class="form-group mt-2">
                             <label for="num_serie">Numero Serie:</label>
-                            <input type="text" class="form-control" id="num_serie" x-model="num_serie">
+                            <input type="text" class="form-control" id="num_serie" x-model="num_serie" value=""><!--es una suposision , form-control sirve como para separar varios opciones-->
                         </div>
                         <div class="form-group mt-2">
                             <label for="nombre">nombre:</label>
-                            <input class="form-control" type="text" id="nombre" x-model="nombre">
+                            <input class="form-control" type="text" id="nombre" x-model="nombre" value="">
                         </div>
                         <div class="form-group mt-2">
                             <label for="imagen">imagen:</label>
-                            <input class="form-control" type="text" id="imagen" x-model="imagen">
+                            <input class="form-control" type="text" id="imagen" x-model="imagen" value="">
                         </div>
                         <div class="form-group mt-2">
                             <label for="cantidad">Cantidad:</label>
-                            <input class="form-control" type="number" id="cantidad" x-model="cantidad">
+                            <input class="form-control" type="number" id="cantidad" x-model="cantidad" value="">
                         </div>
                         <div class="form-group mt-2">
                             <label for="precio_compra">compra:</label>
-                            <input class="form-control" type="number" id="precio_compra" x-model="precio_compra" step=".01">
+                            <input class="form-control" type="number" id="precio_compra" x-model="precio_compra" step=".01" value="">
                         </div>
                         <div class="form-group mt-2">
                             <label for="precio_venta">venta:</label>
-                            <input class="form-control" type="number" id="precio_venta" x-model="precio_venta" step=".01">
+                            <input class="form-control" type="number" id="precio_venta" x-model="precio_venta" step=".01" value="">
                         </div>
                         <div class="form-group mt-2">
                             <label for="fecha_vencimiento">vence:</label>
-                            <input class="form-control" type="date" id="fecha_vencimiento" x-model="fecha_vencimiento" >
+                            <input class="form-control" type="date" id="fecha_vencimiento" x-model="fecha_vencimiento" value="">
                         </div>
                         <div class="form-group mt-2">
                             <label for="id_categorias">categoria:</label>
-                            <input class="form-control" type="integer" id="id_categorias" x-model="id_categorias" >
+                            <input class="form-control" type="integer" id="id_categorias" x-model="id_categorias" value="">
                         </div>
                         <div class="form-group mt-2">
                             <label for="id_marcas">Marcas:</label>
-                            <input class="form-control" type="integer" id="id_marcas" x-model="id_marcas" >
+                            <input class="form-control" type="integer" id="id_marcas" x-model="id_marcas" value="">
                         </div>
                         <div class="form-group mt-2">
                             <label for="id_proveedores">Proveedores:</label>
-                            <input class="form-control" type="integer" id="id_proveedores" x-model="id_proveedores" >
+                            <input class="form-control" type="integer" id="id_proveedores" x-model="id_proveedores" value="">
                         </div>
 
 
