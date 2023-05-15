@@ -37,9 +37,9 @@ class productosController extends Controller
             'precio_compra'=>'required|numeric',
             'precio_venta'=>'required|numeric',
             'fecha_vencimiento'=>'date',
-            'id_categorias'=>'integer',
-            'id_marcas'=>'integer',
-            'id_proveedores'=>'integer'
+            'id_categorias'=>'integer|min:1|max:5',
+            'id_marcas'=>'integer|min:1|max:5',
+            'id_proveedores'=>'integer|min:1|max:5'
 
         ]);
 
@@ -69,8 +69,8 @@ class productosController extends Controller
     }
 
     public function editarProducto(Request $request){
-        $idProducto = productos::find($request->id_det);
-        if (!$idProducto) {
+        $productos = productos::find($request->id);
+        if (!$productos) {
             return response()->json(
                 ['mensaje' => 'no existe ess productos']
             );
@@ -81,13 +81,13 @@ class productosController extends Controller
             'nombre'=>'required|string',
             'imagen'=>'required|string',
             'cantidad'=>'required|interger',
-            'precio_compra'=>'required|decimal',
-            'precio_venta'=>'required|decimal',
+            'precio_compra'=>'required|numeric',
+            'precio_venta'=>'required|numeric',
             'fecha_vencimiento'=>'required|string',
-            'id_categorias'=>'required|1-5',
+            /* 'id_categorias'=>'required|1-5',
             'id_marcas'=>'required|1-5',
             'id_proveedores'=>'required|1-5'
-
+ */
         ]);
 
         if ($validator->fails()) {
@@ -95,18 +95,18 @@ class productosController extends Controller
                 ['mensaje' => $validator->errors()]
             );
         }
-
-        $idProducto->num_serie = $request->num_serie;
-        $idProducto->nombre = $request->nombre;
-        $idProducto->imagen = $request->imagen;
-        $idProducto->cantidad = $request->cantidad;
-        $idProducto->precio_compra = $request->precio_compra;
-        $idProducto->precio_venta = $request->precio_venta;
-        $idProducto->fecha_vencimiento = $request->fecha_vencimiento;
-        $idProducto->id_categorias = $request->id_categorias;
-        $idProducto->id_marcas = $request->id_marcas;
-        $idProducto->id_proveedores = $request->id_proveedores;
-        $idProducto->save();
+        
+        $productos->num_serie = $request->num_serie;
+        $productos->nombre = $request->nombre;
+        $productos->imagen = $request->imagen;
+        $productos->cantidad = $request->cantidad;
+        $productos->precio_compra = $request->precio_compra;
+        $productos->precio_venta = $request->precio_venta;
+        $productos->fecha_vencimiento = $request->fecha_vencimiento;
+       /*  $productos->id_categorias = $request->id_categorias;
+        $productos->id_marcas = $request->id_marcas;
+        $productos->id_proveedores = $request->id_proveedores; */
+        $productos->save();
         return response()->json(
             ['mensaje' => 'bjeto editado con exito']
         );
