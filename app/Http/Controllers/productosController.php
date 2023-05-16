@@ -25,9 +25,7 @@ class productosController extends Controller
                 ['mensaje' => 'no existe esedetalles']
             );
         }
-        return response()->json(
-            $idProducto
-        );
+        return http::respuesta(http::retOK, $idProducto);
     }
 
     public function guardarProducto(Request $request){

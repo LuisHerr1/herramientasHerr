@@ -8,125 +8,82 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script defer>
         //guardar producto
-        function guardarProducto() {
-            const num_serie = this.num_serie;
-            const nombre = this.nombre;
-            const imagen = this.imagen;
-            const cantidad = this.cantidad;
-            const precio_compra = this.precio_compra;
-            const precio_venta = this.precio_venta;
-            const fecha_vencimiento = this.fecha_vencimiento;
-            const id_categorias = this.id_categorias;
-            const id_marcas = this.id_marcas;
-            const id_proveedores = this.id_proveedores;
 
-            axios.post('http://127.0.0.1:8000/api/productos/save', {
-                num_serie,
-                nombre,
-                imagen,
-                cantidad,
-                precio_compra,
-                precio_venta,
-                fecha_vencimiento,
-                id_categorias,
-                id_marcas,
-                id_proveedores
-            })
-            .then(response => {
-                console.log(response.data);
-                obtenerProducto();
-            })
-            .catch(error => {
-                console.log(error.response.data);
-            });
-        }
-
-        function obtenerProducto() {
+        function data () {
             return {
+                num_serie:'',
+                nombre:'',
+                imagen:'',
+                cantidad:'',
+                precio_compra:'',
+                precio_venta:'',
+                fecha_vencimiento:'',
+                id_categorias:'',
+                id_marcas:'',
+                id_proveedores:'',
                 productos: [],
                 init: async function(){
+                    this.obtenerProductos();
+                },
+                editarProducto: async function (id) {
+                    this.productos = axios.get('http://localhost:8000/api/productos/list/'+id)
+                    .then(response => {
+                        console.log(response.data);
+                    })
+                    .catch(error => console.log(error))
+                },
+
+                eliminarProducto: async function (id){
+
+                },
+                guardarProducto: async function () {
+                    const data = {
+                        num_serie: this.num_serie,
+                        nombre: this.nombre,
+                        imagen: this.imagen,
+                        cantidad: this.cantidad,
+                        precio_compra: this.precio_compra,
+                        precio_venta: this.precio_venta,
+                        fecha_vencimiento: this.fecha_vencimiento,
+                        id_categorias: this.id_categorias,
+                        id_marcas: this.id_marcas,
+                        id_proveedores: this.id_proveedores
+                    }
+
+                    axios.post('http://127.0.0.1:8000/api/productos/save', data)
+                    .then(response => {
+                        console.log(response.data);
+                        this.obtenerProductos();
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+                },
+                obtenerProductos: async function () {
                     this.productos = await axios.get('http://127.0.0.1:8000/api/productos/list')
                     .then(response => {
                         console.log(response.data);
-                        return response.data;
-                    }).catch(error => console.log(error));
-                },
-                editarProducto(id){
-                    /* const num_serie = document.getElementById('num_serie').value;
-                    const nombre = document.getElementById('nombre').value;
-                    const imagen = document.getElementById('imagen').value;
-
-                    */
-                   /*  const table = document.getElementById('tabla-productos')
-                    const table = document.getElementById('modalProductos')
-                    const inputs = document.querrySelectorAll('input')
-                    let count = 0;
-                    */
-                    axios.put('http://127.0.0.1:8000/api/productos/update/'+id, {
-
-                        num_serie: this.num_serie,
-                        nombre: this.nombre,
-                        imagen: this.editarProducto,
-                        cantidad: this.editarProducto,
-                        precio_compra: this.precio_compra,
-                        precio_venta: this.precio_venta,
-                        fecha_vencimiento: this.fecha_vencimiento
-                       })
-                        .then(response => {
-                        console.log(response.data);
-                        })
-                        .catch(error => {
-                        console.log(error.response.data);
-                        });
+                        return response.data.datos;
+                    }).catch(error => console.log(error))
                 }
-                eliminarProducto(id){ //deberia estar este metodo fuera del metodo obtenerproductos??
-                    axios.delete("http://127.0.0.1:8000/api/productos/delete/"+id)
-                    .then(res=> {
-                        console.log(res.data);
-                    })
-                    .catch(err => console.log(err));
-                },
-
             }
         }
-        //para usar las alertas de sweet alert
-        function show_alerts(mensaje, icono, foco) {
-            if (foco !== "") {
-                $('#'+foco).trigger('focus');
-            }
-            Swal.fire({
-                title:mensaje,
-                icon:icono,
-                customClass: {confirmButton: "btn btn-primary", popup: "animated xoomIn"},
-                buttonsStylling: false
-        });
-    }
     </script>
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.0/dist/cdn.min.js"></script>
-
-    <title>@yield('title')</title>
-
+    <title>Productos</title>
 </head>
-<body>
+<body x-data="data">
     <div class="container-fluid">
         <div class="row mt-3">
             <div class="col-md-4 offset-md-4">
                 <div class="d-grid mx-auto">
-                <!--------------------->
-                <!--RETROALIMENTACION-->
-                <!--------------------->
-
-                <!--para cambios futuros puede considerase agregar otro modal par la edicion de productos , ya que en el actual tanto como nuevo producto y editar apuntan o usan el mismo modal-->
-                <!-- -->
-
-                    <!--en este boton se sirve para crear una fila en la tabla de datos este hace un llamado hacia un modal que es el mismo llamdo por el boton editar-->
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalProductos">
                         Nuevo
                     </button>
                 </div>
             </div>
         </div>
-        <div class="row mt-3" >
+        <div class="row mt-3">
             <div class="col-12 col-lg-8 offset-0 offset-lg-2">
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover" id="tabla-productos">
@@ -146,8 +103,8 @@
                                 <th class="text-center">acciones</th>
                             </tr>
                         </thead>
-                        <tbody x-data='obtenerProducto()'><!--en este -->
-                            <template x-for='(producto,index) in productos.datos' :key='index'>
+                        <tbody>
+                            <template x-for='(producto,index) in productos' :key='index'>
                                 <tr>
                                     <td class="text-center" x-text="producto.id"></td>
                                     <td class="text-center" x-text="producto.num_serie"></td>
@@ -161,7 +118,6 @@
                                     <td class="text-center" x-text="producto.id_marcas"></td>
                                     <td class="text-center" x-text="producto.id_proveedores"></td>
                                     <td class="text-center" >
-                                        <!--el primer siguiente boton es para abrir el modal al dar click sobre el boton se llama a la funcion editarProducto con el parametro"id" de la tabla producto-->
                                         <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalProductos" @click="editarProducto(producto.id)">Editar</button>
                                         <button class="btn btn-danger" @click="eliminarProducto(producto.id)">Eliminar</button>
                                     </td>
@@ -182,8 +138,8 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div x-data="{ num_serie: '', nombre: '', imagen: '', cantidad:'',precio_compra:'', precio_venta:'',fecha_vencimiento:'', id_categorias:'', id_marcas: '', id_proveedores:'' }">
-                    <form @submit.prevent="guardarProducto"> <!--los nombres deben ir tal como en los campos de la tabla de la base de datos-->
+                <div x-data="{  num_serie: '', nombre: '', imagen: '', cantidad:'',precio_compra:'', precio_venta:'',fecha_vencimiento:'', id_categorias:'', id_marcas: '', id_proveedores:'' }">
+                    <form @submit.prevent="guardarProducto">
                         <div class="form-group mt-2">
                             <label for="num_serie">Numero Serie:</label>
                             <input type="text" class="form-control" id="num_serie" x-model="num_serie" value=""><!--es una suposision , form-control sirve como para separar varios opciones-->
