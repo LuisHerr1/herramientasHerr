@@ -39,9 +39,9 @@ class productosController extends Controller
             'precio_compra'=>'required|numeric',
             'precio_venta'=>'required|numeric',
             'fecha_vencimiento'=>'date',
-            'id_categorias'=>'integer|1-5',
-            'id_marcas'=>'integer|1-5',
-            'id_proveedores'=>'integer|1-5'
+            'id_categorias'=>'integer|min:1|max:5',
+            'id_marcas'=>'integer|min:1|max:5',
+            'id_proveedores'=>'integer|min:1|max:5'
 
         ]);
 
@@ -68,9 +68,9 @@ class productosController extends Controller
         );
     }
 
-    public function editarProducto(Request $request,$id){
-        $idProducto = productos::find($request->$id);
-        if (!$idProducto) {
+    public function editarProducto(Request $request){
+        $productos = productos::find($request->id);
+        if (!$productos) {
             return response()->json(
                 ['mensaje' => 'no existe ese productos']
             );//al hacer uso de insomnia da como resultado un error 500 en el que ademas se indica que no se puede editar o modificar un row child
@@ -81,31 +81,38 @@ class productosController extends Controller
             //una posible solucion es la de ono tratar de moodificar ninguna de las llaves foraneas ya sea en el controlador ni en la vista
 
         };
-        
+
         $validator = Validator::make($request->all(), [
             'num_serie' =>'required|string',
             'nombre'=>'required|string',
             'imagen'=>'required|string',
-            'cantidad'=>'required|integer',
-            'precio_compra'=>'required|decimal',
-            'precio_venta'=>'required|decimal',
-            'fecha_vencimiento'=>'required|string'
-            /* 'id_categorias'=>'required|integer',
-            'id_marcas'=>'required|integer',
-            'id_proveedores'=>'required|integer'
+            'cantidad'=>'required|interger',
+            'precio_compra'=>'required|numeric',
+            'precio_venta'=>'required|numeric',
+            'fecha_vencimiento'=>'required|string',
+            /* 'id_categorias'=>'required|1-5',
+            'id_marcas'=>'required|1-5',
+            'id_proveedores'=>'required|1-5'
  */
         ]);
-        $idProducto->num_serie = $request->get('num_serie');
-        $idProducto->nombre = $request->get('nombre');
-        $idProducto->imagen = $request->get('imagen');
-        $idProducto->cantidad = $request->get('cantidad');
-        $idProducto->precio_compra = $request->get('precio_compra');
-        $idProducto->precio_venta = $request->get('precio_venta');
-        $idProducto->fecha_vencimiento = $request->get('fecha_vencimiento');
-        /* $idProducto->id_categorias = $request->get('id_categorias');
-        $idProducto->id_marcas = $request->get('id_marcas');
-        $idProducto->id_proveedores = $request->get('id_proveedores'); */
-        $idProducto->save();
+
+        if ($validator->fails()) {
+            return response()->json(
+                ['mensaje' => $validator->errors()]
+            );
+        }
+
+        $productos->num_serie = $request->num_serie;
+        $productos->nombre = $request->nombre;
+        $productos->imagen = $request->imagen;
+        $productos->cantidad = $request->cantidad;
+        $productos->precio_compra = $request->precio_compra;
+        $productos->precio_venta = $request->precio_venta;
+        $productos->fecha_vencimiento = $request->fecha_vencimiento;
+       /*  $productos->id_categorias = $request->id_categorias;
+        $productos->id_marcas = $request->id_marcas;
+        $productos->id_proveedores = $request->id_proveedores; */
+        $productos->save();
         return response()->json(
             ['mensaje' => 'bjeto editado con exito']
         );

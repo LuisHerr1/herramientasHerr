@@ -93,14 +93,11 @@
                         fecha_vencimiento: this.fecha_vencimiento
                        })
                     .then(response => {
-                        console.log(response.data);
-
+                    console.log(response.data);
                     })
                     .catch(error => {
-                        console.log(error.response);
+                    console.log(error.response.data);
                     });
-                        },
-
                 eliminarProducto(id){ //deberia estar este metodo fuera del metodo obtenerproductos??
                     axios.delete("http://127.0.0.1:8000/api/productos/delete/"+id)
                     .then(res=> {
