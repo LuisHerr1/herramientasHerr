@@ -20,8 +20,8 @@
             const id_marcas = this.id_marcas;
             const id_proveedores = this.id_proveedores;
 
-            axios.post('http://127.0.0.1:8000/api/productos/save', {//
-                num_serie,                                          //
+            axios.post('http://127.0.0.1:8000/api/productos/save', {
+                num_serie,
                 nombre,
                 imagen,
                 cantidad,
@@ -56,32 +56,12 @@
                     const nombre = document.getElementById('nombre').value;
                     const imagen = document.getElementById('imagen').value;
 
- */
+                    */
                    /*  const table = document.getElementById('tabla-productos')
                     const table = document.getElementById('modalProductos')
                     const inputs = document.querrySelectorAll('input')
                     let count = 0;
-
-                    table.addEventListener('click',(e)=>{
-
-                        if(e.target.matches(".btn-info")){
-                            let data = e.target.patentElement.parentElement.children;
-                            fillData(data)
-                            modal.classList.toggle('translate')
-                        }
-
-
-                    })
-
-                    const fillData = (data)=>{
-                        for(let index  of inputs){
-                            index.value = data[count].textContent
-                            console.log(index)
-                            count+=1
-                        }
-
-                    } */
-
+                    */
                     axios.put('http://127.0.0.1:8000/api/productos/update/'+id, {
 
                         num_serie: this.num_serie,
@@ -92,12 +72,13 @@
                         precio_venta: this.precio_venta,
                         fecha_vencimiento: this.fecha_vencimiento
                        })
-                    .then(response => {
-                    console.log(response.data);
-                    })
-                    .catch(error => {
-                    console.log(error.response.data);
-                    });
+                        .then(response => {
+                        console.log(response.data);
+                        })
+                        .catch(error => {
+                        console.log(error.response.data);
+                        });
+                }
                 eliminarProducto(id){ //deberia estar este metodo fuera del metodo obtenerproductos??
                     axios.delete("http://127.0.0.1:8000/api/productos/delete/"+id)
                     .then(res=> {
@@ -105,6 +86,7 @@
                     })
                     .catch(err => console.log(err));
                 },
+
             }
         }
         //para usar las alertas de sweet alert
