@@ -142,14 +142,14 @@
                     <form @submit.prevent="guardarProducto">
                         <div class="form-group mt-2">
                             <label for="num_serie">Numero Serie:</label>
-                            <input type="text" class="form-control" id="num_serie" x-model="num_serie" value=""><!--es una suposision , form-control sirve como para separar varios opciones-->
+                            <input type="text" class="form-control" id="num_serie" x-model="num_serie" value="">
                         </div>
                         <div class="form-group mt-2">
                             <label for="nombre">nombre:</label>
-                            <input class="form-control" type="text" id="nombre" x-model="nombre" value="">
-                        </div>
-                        <div class="form-group mt-2">
-                            <label for="imagen">imagen:</label>
+                            <input class="form-control" type="text" id="nombre" x-model="nombre" value="productos.num_serie">
+                        </div>                          <!--para poder mostrar los datos precargados en la vase dd datos, abrir bloque php -->
+                        <div class="form-group mt-2"> <!--$variable = $_SESSION['variable'];$data = mysqi_querry($conexion,'SELECT * FROM nomTABLA WHERE campo = $variable')-->
+                            <label for="imagen">imagen:</label><!-- WHILE ($consulta = mysqli_fetch_array($data))cerrar bloque php-->
                             <input class="form-control" type="text" id="imagen" x-model="imagen" value="">
                         </div>
                         <div class="form-group mt-2">

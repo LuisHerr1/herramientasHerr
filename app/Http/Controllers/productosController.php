@@ -65,10 +65,18 @@ class productosController extends Controller
             ['mensaje' => 'detalles guardados con exito']
         );
     }
-
+    public function editar($id){
+        $productos = productos::find($id);
+        if ($productos){
+            return Http::respuesta(http::retOK,$productos);
+        }else{
+            return Http::respuesta(http::retNotFound,"no encontrado");
+        }
+    }
     public function editarProducto(Request $request){
         $productos = productos::find($request->id);
         if (!$productos) {
+            $productos->update::all();
             return response()->json(
                 ['mensaje' => 'no existe ese productos']
             );//al hacer uso de insomnia da como resultado un error 500 en el que ademas se indica que no se puede editar o modificar un row child
