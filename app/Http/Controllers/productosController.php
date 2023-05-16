@@ -39,7 +39,7 @@ class productosController extends Controller
             'precio_compra'=>'required|numeric',
             'precio_venta'=>'required|numeric',
             'fecha_vencimiento'=>'date',
-            'id_categorias'=>'integer|1-5',//ESTA VALIDACION PUEDE CAMBIAR SEGUN EL NIMERO DE PROVEEDORES AUMENTA
+            'id_categorias'=>'integer|1-5',
             'id_marcas'=>'integer|1-5',
             'id_proveedores'=>'integer|1-5'
 
@@ -81,6 +81,7 @@ class productosController extends Controller
             //una posible solucion es la de ono tratar de moodificar ninguna de las llaves foraneas ya sea en el controlador ni en la vista
 
         };
+        
         $validator = Validator::make($request->all(), [
             'num_serie' =>'required|string',
             'nombre'=>'required|string',

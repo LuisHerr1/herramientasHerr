@@ -55,13 +55,7 @@
                     /* const num_serie = document.getElementById('num_serie').value;
                     const nombre = document.getElementById('nombre').value;
                     const imagen = document.getElementById('imagen').value;
-                    const cantidad = document.getElementById('cantidad').value;
-                    const precio_compra = document.getElementById('precio_compra').value;
-                    const precio_venta = document.getElementById('precio_venta').value;
-                    const fecha_vencimiento = document.getElementById('fecha_vencimiento').value;
-                    const id_categorias = document.getElementById('id_categorias').value;
-                    const id_marcas = document.getElementById('id_marcas').value;
-                    const id_proveedores = document.getElementById('id_proveedores').value;
+
  */
                    /*  const table = document.getElementById('tabla-productos')
                     const table = document.getElementById('modalProductos')
@@ -90,17 +84,14 @@
 
                     axios.put('http://127.0.0.1:8000/api/productos/update/'+id, {
 
-                        num_serie: num_serie,
-                        nombre: nombre,
-                        imagen: imagen,
-                        cantidad: cantidad,
-                        precio_compra: precio_compra,
-                        precio_venta: precio_venta,
-                        fecha_vencimiento: fecha_vencimiento,
-                        id_categorias: id_categorias,
-                        id_marcas: id_marcas,
-                        id_proveedores: id_proveedores
-                    })
+                        num_serie: this.num_serie,
+                        nombre: this.nombre,
+                        imagen: this.editarProducto,
+                        cantidad: this.editarProducto,
+                        precio_compra: this.precio_compra,
+                        precio_venta: this.precio_venta,
+                        fecha_vencimiento: this.fecha_vencimiento
+                       })
                     .then(response => {
                         console.log(response.data);
 
@@ -145,7 +136,7 @@
                 <!--------------------->
                 <!--RETROALIMENTACION-->
                 <!--------------------->
-                
+
                 <!--para cambios futuros puede considerase agregar otro modal par la edicion de productos , ya que en el actual tanto como nuevo producto y editar apuntan o usan el mismo modal-->
                 <!-- -->
 
@@ -161,7 +152,7 @@
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover" id="tabla-productos">
                         <thead>
-                            <tr>
+                            <tr><!--para crear las columnas-->
                                 <th class="text-center">ID</th>
                                 <th class="text-center">Numero Serie</th>
                                 <th class="text-center">Nombre</th>
