@@ -81,7 +81,6 @@ class productosController extends Controller
             //una posible solucion es la de ono tratar de moodificar ninguna de las llaves foraneas ya sea en el controlador ni en la vista
 
         };
-
         $validator = Validator::make($request->all(), [
             'num_serie' =>'required|string',
             'nombre'=>'required|string',
