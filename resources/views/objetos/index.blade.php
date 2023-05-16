@@ -25,6 +25,10 @@
                 init: async function(){
                     this.obtenerProductos();
                 },
+                //en uno de los videos se igualan los campos del modal a los datos enviados como respuesta
+                //this.formData.campo1 = res.data.productos.campo1
+                //this.formData.campo2 = res.data.productos.campo2
+                //thi........
                 editarProducto: async function (id) {
                     this.productos = axios.get('http://localhost:8000/api/productos/list/'+id)
                     .then(response => {
