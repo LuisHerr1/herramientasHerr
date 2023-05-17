@@ -30,7 +30,7 @@
                 //this.formData.campo2 = res.data.productos.campo2
                 //thi........
                 editarProducto: async function (id) {
-                    this.productos = axios.put('http://localhost:8000/api/productos/list/'+id)
+                    this.productos = axios.post('http://localhost:8000/api/productos/list/'+id)
                     .then(response => {
                         console.log(response.data);
                     })
@@ -150,7 +150,7 @@
                         </div>
                         <div class="form-group mt-2">
                             <label for="nombre">nombre:</label>
-                            <input class="form-control" type="text" id="nombre" x-model="nombre" value="nombre.value">
+                            <input class="form-control" type="text" id="nombre" x-model="nombre" value="+nombre.value">
                         </div>                          <!--para poder mostrar los datos precargados en la vase dd datos, abrir bloque php -->
                         <div class="form-group mt-2"> <!--$variable = $_SESSION['variable'];$data = mysqi_querry($conexion,'SELECT * FROM nomTABLA WHERE campo = $variable')-->
                             <label for="imagen">imagen:</label><!-- WHILE ($consulta = mysqli_fetch_array($data))cerrar bloque php-->
@@ -160,7 +160,7 @@
                                                         <!-- var var2=namvar.split('-')despues acceder a ccada elemnto usando [i] -->
                                                         <!--document.getElementById(id).value=var2[i]-->
                             <label for="cantidad">Cantidad:</label>
-                            <input class="form-control" type="number" id="cantidad" x-model="cantidad" value="">
+                            <input class="form-control" type="number" name="nombre" id="cantidad" x-model="cantidad" value=\"nombre\">
                         </div>
                         <div class="form-group mt-2">
                             <label for="precio_compra">compra:</label>
@@ -187,7 +187,15 @@
                             <input class="form-control" type="integer" id="id_proveedores" x-model="id_proveedores" value="">
                         </div>
 
-
+                       {{--  // Obtener el valor del campo de la base de datos
+                        var nombre = "<?php echo $nombre; ?>";
+                        // Seleccionar el modal y el input
+                        var modal = $('#myModal');
+                        var input = modal.find('#nombre');
+                        // Asignar el valor del input al abrir el modal
+                        modal.on('show.bs.modal', function() {
+                          input.val(nombre);
+                        }); --}}
 
                         <div class="form-group mt-2">
                             <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Registrar</button>
