@@ -30,7 +30,7 @@
                 //this.formData.campo2 = res.data.productos.campo2
                 //thi........
                 editarProducto: async function (id) {
-                    this.productos = axios.get('http://localhost:8000/api/productos/list/'+id)
+                    this.productos = axios.put('http://localhost:8000/api/productos/list/'+id)
                     .then(response => {
                         console.log(response.data);
                     })
@@ -150,13 +150,15 @@
                         </div>
                         <div class="form-group mt-2">
                             <label for="nombre">nombre:</label>
-                            <input class="form-control" type="text" id="nombre" x-model="nombre" value="productos.num_serie">
+                            <input class="form-control" type="text" id="nombre" x-model="nombre" value="nombre.value">
                         </div>                          <!--para poder mostrar los datos precargados en la vase dd datos, abrir bloque php -->
                         <div class="form-group mt-2"> <!--$variable = $_SESSION['variable'];$data = mysqi_querry($conexion,'SELECT * FROM nomTABLA WHERE campo = $variable')-->
                             <label for="imagen">imagen:</label><!-- WHILE ($consulta = mysqli_fetch_array($data))cerrar bloque php-->
                             <input class="form-control" type="text" id="imagen" x-model="imagen" value="">
-                        </div>
-                        <div class="form-group mt-2">
+                        </div>                          <!--otra forma para solucionar este problema puede ser declarar una variable en js-->
+                        <div class="form-group mt-2">   <!-- var namvar=document.getElementById('TABLA')-->
+                                                        <!-- var var2=namvar.split('-')despues acceder a ccada elemnto usando [i] -->
+                                                        <!--document.getElementById(id).value=var2[i]-->
                             <label for="cantidad">Cantidad:</label>
                             <input class="form-control" type="number" id="cantidad" x-model="cantidad" value="">
                         </div>
