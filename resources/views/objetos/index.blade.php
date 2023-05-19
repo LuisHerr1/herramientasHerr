@@ -122,7 +122,7 @@
                                     <td class="text-center" x-text="producto.id_marcas"></td>
                                     <td class="text-center" x-text="producto.id_proveedores"></td>
                                     <td class="text-center" >
-                                        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalProductos" @click="editarProducto(producto.id)">Editar</button>
+                                        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modalEditarProductos" @click="editarProducto(producto.id)">Editar</button>
                                         <button class="btn btn-danger" @click="eliminarProducto(producto.id)">Eliminar</button>
                                     </td>
                                 </tr>
@@ -135,6 +135,84 @@
     </div>
     <!-- INICIO DEL MODAL PRODUCTOS-->
     <div class="modal fade" id="modalProductos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Informacion del producto</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div x-data="{  num_serie: '', nombre: '', imagen: '', cantidad:'',precio_compra:'', precio_venta:'',fecha_vencimiento:'', id_categorias:'', id_marcas: '', id_proveedores:'' }">
+                    <form @submit.prevent="editarProducto">
+                        <div class="form-group mt-2">
+                            <label for="num_serie">Numero Serie:</label>
+                            <input type="text" class="form-control" id="num_serie" x-model="num_serie" value="">
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="nombre">nombre:</label>
+                            <input class="form-control" type="text" id="nombre" x-model="nombre" value="">
+                        </div>                          <!--para poder mostrar los datos precargados en la vase dd datos, abrir bloque php -->
+                        <div class="form-group mt-2"> <!--$variable = $_SESSION['variable'];$data = mysqi_querry($conexion,'SELECT * FROM nomTABLA WHERE campo = $variable')-->
+                            <label for="imagen">imagen:</label><!-- WHILE ($consulta = mysqli_fetch_array($data))cerrar bloque php-->
+                            <input class="form-control" type="text" id="imagen" x-model="imagen" value="">
+                        </div>                          <!--otra forma para solucionar este problema puede ser declarar una variable en js-->
+                        <div class="form-group mt-2">   <!-- var namvar=document.getElementById('TABLA')-->
+                                                        <!-- var var2=namvar.split('-')despues acceder a ccada elemnto usando [i] -->
+                                                        <!--document.getElementById(id).value=var2[i]-->
+                            <label for="cantidad">Cantidad:</label>
+                            <input class="form-control" type="number" id="cantidad" x-model="cantidad" value="nombre">
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="precio_compra">compra:</label>
+                            <input class="form-control" type="number" id="precio_compra" x-model="precio_compra" step=".01" value="">
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="precio_venta">venta:</label>
+                            <input class="form-control" type="number" id="precio_venta" x-model="precio_venta" step=".01" value="">
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="fecha_vencimiento">vence:</label>
+                            <input class="form-control" type="date" id="fecha_vencimiento" x-model="fecha_vencimiento" value="">
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="id_categorias">categoria:</label>
+                            <input class="form-control" type="integer" id="id_categorias" x-model="id_categorias" value="">
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="id_marcas">Marcas:</label>
+                            <input class="form-control" type="integer" id="id_marcas" x-model="id_marcas" value="">
+                        </div>
+                        <div class="form-group mt-2">
+                            <label for="id_proveedores">Proveedores:</label>
+                            <input class="form-control" type="integer" id="id_proveedores" x-model="id_proveedores" value="">
+                        </div>
+
+                       {{--  // Obtener el valor del campo de la base de datos
+                        var nombre = "<?php echo $nombre; ?>";
+                        // Seleccionar el modal y el input
+                        var modal = $('#myModal');
+                        var input = modal.find('#nombre');
+                        // Asignar el valor del input al abrir el modal
+                        modal.on('show.bs.modal', function() {
+                          input.val(nombre);
+                        }); --}}
+
+                        <div class="form-group mt-2">
+                            <button type="submit" class="btn btn-success" data-bs-dismiss="modal">Registrar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- FIN DEL MODAL PRODUCTOS -->
+
+    <!-- INICIO DEL MODAL editPRODUCTOS-->
+    <div class="modal fade" id="modalEditarProductos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -210,6 +288,8 @@
         </div>
       </div>
     <!-- FIN DEL MODAL PRODUCTOS -->
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>

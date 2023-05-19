@@ -73,8 +73,8 @@ class productosController extends Controller
             return Http::respuesta(http::retNotFound,"no encontrado");
         }
     }
-    public function editarProducto(Request $request){
-        $productos = productos::find($request->id);
+    public function editarProducto(Request $request,$id){
+        $productos = productos::find($id);
         if (!$productos) {
             $productos->update::all();
             return response()->json(
