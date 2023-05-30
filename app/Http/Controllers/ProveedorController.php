@@ -47,7 +47,7 @@ class ProveedorController extends Controller
                 ['mensaje' => $validador->errors()]);
            /*  Http::respuesta(http::retError,'hubo un error al ingrasar los datos'); */
         }
-        
+
         $proveedor = new Proveedores();
         $proveedor->codigo = $request->codigo;
         $proveedor->nombre = $request->nombre;
@@ -55,7 +55,7 @@ class ProveedorController extends Controller
         $proveedor->correo = $request->correo;
         $proveedor->direccion = $request->direccion;
         $proveedor->save();
-        return Http::respuesta(http::retOK,'dartos guardados con exito');
+        return Http::respuesta(http::retOK,'datos guardados con exito');
 
 
 

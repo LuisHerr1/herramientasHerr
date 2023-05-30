@@ -30,6 +30,7 @@
                 //this.formData.campo2 = res.data.productos.campo2
                 //thi........
                 editarProducto: async function (id) {
+
                     this.productos = axios.post('http://localhost:8000/api/productos/list/'+id)
                     .then(response => {
                         console.log(response.data);
@@ -146,45 +147,45 @@
                     <form @submit.prevent="editarProducto">
                         <div class="form-group mt-2">
                             <label for="num_serie">Numero Serie:</label>
-                            <input type="text" class="form-control" id="num_serie" x-model="num_serie" value="">
+                            <input type="text" class="form-control" id="num_serie" x-model="num_serie" name="num_serie">
                         </div>
                         <div class="form-group mt-2">
                             <label for="nombre">nombre:</label>
-                            <input class="form-control" type="text" id="nombre" x-model="nombre" value="">
+                            <input class="form-control" type="text" id="nombre" x-model="nombre" name="nombre">
                         </div>                          <!--para poder mostrar los datos precargados en la vase dd datos, abrir bloque php -->
                         <div class="form-group mt-2"> <!--$variable = $_SESSION['variable'];$data = mysqi_querry($conexion,'SELECT * FROM nomTABLA WHERE campo = $variable')-->
                             <label for="imagen">imagen:</label><!-- WHILE ($consulta = mysqli_fetch_array($data))cerrar bloque php-->
-                            <input class="form-control" type="text" id="imagen" x-model="imagen" value="">
+                            <input class="form-control" type="text" id="imagen" x-model="imagen" name="imagen">
                         </div>                          <!--otra forma para solucionar este problema puede ser declarar una variable en js-->
                         <div class="form-group mt-2">   <!-- var namvar=document.getElementById('TABLA')-->
                                                         <!-- var var2=namvar.split('-')despues acceder a ccada elemnto usando [i] -->
                                                         <!--document.getElementById(id).value=var2[i]-->
                             <label for="cantidad">Cantidad:</label>
-                            <input class="form-control" type="number" id="cantidad" x-model="cantidad" value="nombre">
+                            <input class="form-control" type="number" id="cantidad" x-model="cantidad" name="cantidad">
                         </div>
                         <div class="form-group mt-2">
                             <label for="precio_compra">compra:</label>
-                            <input class="form-control" type="number" id="precio_compra" x-model="precio_compra" step=".01" value="">
+                            <input class="form-control" type="number" id="precio_compra" x-model="precio_compra" step=".01" name="precio_compra">
                         </div>
                         <div class="form-group mt-2">
                             <label for="precio_venta">venta:</label>
-                            <input class="form-control" type="number" id="precio_venta" x-model="precio_venta" step=".01" value="">
+                            <input class="form-control" type="number" id="precio_venta" x-model="precio_venta" step=".01" name="precio_venta">
                         </div>
                         <div class="form-group mt-2">
                             <label for="fecha_vencimiento">vence:</label>
-                            <input class="form-control" type="date" id="fecha_vencimiento" x-model="fecha_vencimiento" value="">
+                            <input class="form-control" type="date" id="fecha_vencimiento" x-model="fecha_vencimiento" name="fecha_vencimiento">
                         </div>
                         <div class="form-group mt-2">
                             <label for="id_categorias">categoria:</label>
-                            <input class="form-control" type="integer" id="id_categorias" x-model="id_categorias" value="">
+                            <input class="form-control" type="integer" id="id_categorias" x-model="id_categorias" name="id_categorias">
                         </div>
                         <div class="form-group mt-2">
                             <label for="id_marcas">Marcas:</label>
-                            <input class="form-control" type="integer" id="id_marcas" x-model="id_marcas" value="">
+                            <input class="form-control" type="integer" id="id_marcas" x-model="id_marcas" name="id_marcas">
                         </div>
                         <div class="form-group mt-2">
                             <label for="id_proveedores">Proveedores:</label>
-                            <input class="form-control" type="integer" id="id_proveedores" x-model="id_proveedores" value="">
+                            <input class="form-control" type="integer" id="id_proveedores" x-model="id_proveedores" name="id_proveedores">
                         </div>
 
                        {{--  // Obtener el valor del campo de la base de datos
@@ -238,7 +239,7 @@
                                                         <!-- var var2=namvar.split('-')despues acceder a ccada elemnto usando [i] -->
                                                         <!--document.getElementById(id).value=var2[i]-->
                             <label for="cantidad">Cantidad:</label>
-                            <input class="form-control" type="number" name="nombre" id="cantidad" x-model="cantidad" value=\"nombre\">
+                            <input class="form-control" type="number" name="nombre" id="cantidad" x-model="cantidad" >
                         </div>
                         <div class="form-group mt-2">
                             <label for="precio_compra">compra:</label>
@@ -266,7 +267,7 @@
                         </div>
 
                        {{--  // Obtener el valor del campo de la base de datos
-                        var nombre = "<?php echo $nombre; ?>";
+                        var nombre = "";
                         // Seleccionar el modal y el input
                         var modal = $('#myModal');
                         var input = modal.find('#nombre');
